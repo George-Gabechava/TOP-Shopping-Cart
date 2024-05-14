@@ -1,10 +1,13 @@
 import { render, screen } from "@testing-library/react";
 import App from "../src/App";
-// import { expect, describe, it } from "vitest";
+import { createBrowserRouter, RouterProvider, createMemoryRouter, MemoryRouter} from "react-router-dom";
 
 describe("App component", () => {
   it("renders correct heading", () => {
-    render(<App />);
+    render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>);
     expect(screen.getByRole("heading").textContent).toMatch(/our first test/i);
   });
 });
