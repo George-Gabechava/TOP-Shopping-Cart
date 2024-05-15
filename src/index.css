@@ -1,4 +1,30 @@
+/* Global CSS */
+#root {  
+  margin: 0 auto;
+  text-align: center;
+}
+
+:root {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
 /* NavBar CSS */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100vw;
+
+  background-color: aquamarine;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 button {
   width: 200px;
   height: 123px;
@@ -8,22 +34,44 @@ button {
   font-size: large;
 }
 
-/* Body CSS */
-:root {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+nav a {
+  color: black;
+  text-decoration: none;
 }
 
-body {
-  /* margin: 0; */
+#navLeft {
   display: flex;
-  /* place-items: center; */
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
 }
 
-h1 {
-  /* font-size: 3em; */
+#navRight {
+  display: flex;
+  justify-content: center;
 }
 
+/* Home CSS */
+#homeImage {
+  height: 50vh;
+  margin-bottom: 50px;
+}
+
+.content {
+  display: flex;
+  background-color: #cd853f;
+  flex-direction: column;
+  align-items: center;
+  /* don't want whitespace at bottom of home page */
+}
+
+/* Shop CSS */
+#shopGrid {
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 3fr 1fr;
+}
 
 /* Footer CSS */
+footer {
+  background-color: grey;
+  width: 100vw;
+}

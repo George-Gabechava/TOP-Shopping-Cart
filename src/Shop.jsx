@@ -1,11 +1,20 @@
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const Shop = () => {
   return (
-    <div>
+    <div className="content">
       <NavBar></NavBar>
-      <h1>Hello from Shop page!</h1>
-      <p>So, how are you?</p>
+      <div id="shopGrid">
+        <div id="leftShop">
+          <h1>Hello from Shop page!</h1>
+          <p>So, how are you?</p>
+        </div>
+        <div id="rightShop">
+          
+        </div>
+      </div>
+      <Footer></Footer>
     </div>
   );
 };

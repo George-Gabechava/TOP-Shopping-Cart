@@ -1,22 +1,24 @@
 // Navbar.jsx
 import { Link } from 'react-router-dom';
+import home from "./assets/home.svg";
 
 const NavBar = () => {
   return (
-    <div>
       <nav>
-        <Link to="/">
-          <button>Home Page</button>
+        <Link id='navLeft' to="/">
+          <img id="homeSVG" src={home}></img>
+          <p>Home</p>
         </Link>
-        <Link to="shop">
-          <button>Shop Page</button>
-        </Link>
+        <div id='navRight'>
+          <Link to="shop">
+            <p>Shop Page</p>
+          </Link>
+          <Link to="cart">
+            <p>Cart</p>
+          </Link>
+          </div>
       </nav>
-    </div>
   );
 };
 
-// document.getElementById('foo').className = classes.btn
-
 export default NavBar
-
