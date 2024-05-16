@@ -1,12 +1,12 @@
+//main.jsx 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 
-import { createBrowserRouter, RouterProvider, createMemoryRouter, MemoryRouter} from "react-router-dom";
+import {RouterProvider, createMemoryRouter} from "react-router-dom";
 import routes from "./routes.jsx"
-import NavBar from './NavBar.jsx';
 
-// might want to try createMemoryRouter
+// Create Page Using Router
 const router = createMemoryRouter(routes, {
   initialEntries: ["/", "/Shop.jsx"],
   initialIndex: 0,
@@ -17,3 +17,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
+

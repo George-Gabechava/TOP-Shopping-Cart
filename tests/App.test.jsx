@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import App from "../src/App";
-import { createBrowserRouter, RouterProvider, createMemoryRouter, MemoryRouter} from "react-router-dom";
+import { MemoryRouter} from "react-router-dom";
 
 describe("App component", () => {
   it("renders correct heading", () => {
@@ -8,6 +8,6 @@ describe("App component", () => {
     <MemoryRouter>
       <App />
     </MemoryRouter>);
-    expect(screen.getByRole("heading").textContent).toMatch(/our first test/i);
+    expect(screen.getByRole("heading").textContent).toMatch(/the random stuff store/i);
   });
 });

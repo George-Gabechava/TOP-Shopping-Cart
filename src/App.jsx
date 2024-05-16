@@ -1,17 +1,15 @@
 // App.jsx
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import messyYard from './assets/messy-yard.jpg';
-
 import NavBar from './NavBar';
 import Footer from './Footer';
+
+import getShop from './Components/getShop';
 
 const App = () => {
   return (
     <div className='content'>
       <NavBar></NavBar>
-      <h1>Our First Test</h1>
-      <p>This is the home page </p>      
+      <h1>The Random Stuff Store</h1>
+      <p>{"Do you need more random stuff in your life? Well you've come to the right place!"}</p>      
       {/* maybe make the image the background with some text over it */}
       {/* <img id='homeImage' src={messyYard} alt="Messy Yard" /> */}
       <Footer></Footer>
@@ -19,4 +17,5 @@ const App = () => {
   );
 };
 
-export default App
+
+export default App;

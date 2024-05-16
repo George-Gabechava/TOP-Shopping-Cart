@@ -1,19 +1,27 @@
 // Navbar.jsx
 import { Link } from 'react-router-dom';
 import home from "./assets/home.svg";
+import cart from "./assets/cart-variant.svg"
 
 const NavBar = () => {
   return (
       <nav>
-        <Link id='navLeft' to="/">
-          <img id="homeSVG" src={home}></img>
-          <p>Home</p>
-        </Link>
-        <div id='navRight'>
-          <Link to="shop">
-            <p>Shop Page</p>
+        {/* Left Side of Navigation Bar */}
+        <div id='navLeft'>
+          <Link className='navLeftItem' to="/">
+            <img id="homeSVG" src={home} alt='home icon'></img>
+            <p>The Random Stuff Store</p>
           </Link>
-          <Link to="cart">
+        </div>
+
+        {/* Right Side of Navigation Bar */}
+        <div id='navRight'>
+          <Link className='navRightItem' to="shop">
+            <p id='shopLink'>Shop</p>
+          </Link>
+          <Link className='navRightItem' to="cart">
+            <img id="cartSVG" src={cart} alt='cart icon'></img>
+            {/* use state here to update # items in cart when it changes */}
             <p>Cart</p>
           </Link>
           </div>
