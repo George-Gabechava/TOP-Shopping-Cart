@@ -1,5 +1,5 @@
 // Shop.jsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -28,18 +28,25 @@ const Shop = () => {
   return (
     <div className="content">
       <NavBar />
-      <div id="shopGrid">
-        <div id="leftShop">
-          <h1>Hello from Shop page!</h1>
-          <p>So, how are you?</p>
-        </div>
-        <div id="rightShop"></div>
+      <div id="shopHeader">
+        <h1>Hello from Shop page!</h1>
+        <p>So, how are you?</p>
       </div>
+      {/* make the cards and cart function for each item which will useState */}
+      <ul id="shopList" className="noBullets">
       {data && data.map((item) => (
         <li key={item.id}>
         <p>{item.title}</p>
+        <img className="shopImage" src={item.image}></img>
+        {/* <p>{item.description}</p> */}
+        <p>${item.price}</p>
+        <div className="interactionBar">
+        <input placeholder="Quantity"></input>
+          <button onClick={() => NavBar(1)}>Add to Cart</button>                      
+        </div>
         </li>
       ))}
+      </ul>
       <Footer />
     </div>
   );
