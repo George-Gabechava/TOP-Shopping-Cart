@@ -20,7 +20,7 @@ nav {
   align-items: center;
   width: 100%;
 
-  background-color: lightblue;
+  background-color: #CAF4FF;
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -28,7 +28,7 @@ nav {
 nav a {
   color: black;
   text-decoration: none;
-  background-color: aqua;
+  background-color: #5AB2FF;
   height: 75px;
 }
 
@@ -75,7 +75,7 @@ nav p {
 .content {
   display: flex;
   width: 100%;
-  background-color: #cd853f;
+  background-color: #FFF9D0;
   flex-direction: column;
   align-items: center;
   /* don't want whitespace at bottom of home page */
@@ -89,12 +89,14 @@ nav p {
 }
 
 #homeList li {
-  background-color: beige;
+  background-color: white;
   margin: 10px;
   padding: 10px;
   max-width: 30vw;
   max-height: 40vh;
   overflow-y: auto;
+  border-radius: 20px;
+
 }
 
 .homeImage {
@@ -117,17 +119,27 @@ nav p {
 }
 
 #shopList li {
-  background-color: beige;
+  background-color: white;
   margin: 10px;
   padding: 10px;
   max-width: 20vw;
   max-height: 30vh;
   overflow-y: auto;
+  border-radius: 10px;
+}
+
+.quantityBar {
+  width: 100%;
+}
+
+.interactionBar {
+  display: flex;
+  justify-content: center;
 }
 
 .shopImage {
   /* width: 100%; */
-  max-height: 65%;
+  max-height: 55%;
   max-width: 100%;
 }
 
@@ -138,6 +150,10 @@ nav p {
 
 /* Footer CSS */
 footer {
-  background-color: grey;
+  background-color: #A0DEFF;
   width: 100vw;
+}
+
+footer a:link {
+  color: black;
 }

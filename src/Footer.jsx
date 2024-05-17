@@ -1,7 +1,9 @@
 const Footer = () => {
   return (
     <footer>
-      <p>This is the footer </p>      
+      <p> Author: <a href="https://github.com/George-Gabechava">George Gabechava</a></p>
+      <p> <a href="https://github.com/George-Gabechava/TOP-Shopping-Cart">Source Code</a></p>
+      <p> Powered by <a href="https://fakestoreapi.com/">Fake Store API</a></p>    
     </footer>
   );
 };
