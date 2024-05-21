@@ -8,11 +8,13 @@ function Shop ({ data, cart, addToCart }) {
 
   return (
     <div className="content">
+      {/* Load Navigation Bar */}
       <NavBar cart={cart} />
       <div id="shopHeader">
         <h1>Shop!</h1>
         <p>Wow! So much random stuff!</p>
       </div>
+      {/* Load the shop items if the data has been fetched */}
       <ul id="shopList" className="noBullets">
         {data &&
           data.map((item) => (
@@ -26,6 +28,7 @@ function Shop ({ data, cart, addToCart }) {
                 placeholder="0"
                 id={`quantity-${item.id}`}
               />
+              {/* Subtract 1 from current item quantity */}
               <div className="interactionBar">
                 <button
                   onClick={() => {
@@ -39,6 +42,8 @@ function Shop ({ data, cart, addToCart }) {
                 >
                   -
                 </button>
+              
+                {/* Put current item quantity into cart*/}
                 <button
                   onClick={() => {
                     const quantity = parseInt(
@@ -49,6 +54,8 @@ function Shop ({ data, cart, addToCart }) {
                 >
                   Add to Cart
                 </button>
+
+                {/* Add 1 to current item quantity */}
                 <button
                   onClick={() => {
                     let quantity = parseInt(
@@ -70,6 +77,7 @@ function Shop ({ data, cart, addToCart }) {
             </li>
           ))}
       </ul>
+      {/* Render Footer */}
       <Footer />
     </div>
   );

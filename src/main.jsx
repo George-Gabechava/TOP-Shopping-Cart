@@ -6,7 +6,7 @@ import './index.css'
 import {RouterProvider, createMemoryRouter} from "react-router-dom";
 import routes from "./routes.jsx"
 
-// Create Page Using Router
+// Create Page Using Router. Loads the home (App.jsx) page.
 const router = createMemoryRouter(routes, {
   initialEntries: ["/", "/Shop.jsx"],
   initialIndex: 0,
