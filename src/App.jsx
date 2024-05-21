@@ -1,13 +1,15 @@
-// App.jsx
 import { useState, useEffect } from 'react';
 import NavBar from './NavBar';
 import Footer from './Footer';
-
 import getShop from './Components/getShop';
 
-const App = () => {
+import { Link } from 'react-router-dom';
+
+//App.jsx
+function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,14 +27,20 @@ const App = () => {
   fetchData();
   }, []);
 
+  const addToCart = (item, quantity) => {
+    setCart((prevCart) => [...prevCart, { ...item, quantity }]);
+    // Clear quantity input after adding item to cart
+    document.getElementById(`quantity-${item.id}`).value = 0;
+  };
+
   const specificItems = data ? [data[1], data[4], data[11], data[15]] : [];
 
   return (
     <div className='content'>
-      <NavBar></NavBar>
+      {/* <NavBar cartCount = {cart.length}></NavBar> */}
+      <NavBar cartCount={cart.length} data={data} cart={cart} addToCart={addToCart} />
       <h1>The Random Stuff Store</h1>
       <p>{"Do you need more random stuff in your life? Well you've come to the right place!"}</p>      
-      {/* maybe make the image the background with some text over it */}
       <ul id='homeList' className="noBullets">
         {specificItems.map((item, index) => (
           item && (
