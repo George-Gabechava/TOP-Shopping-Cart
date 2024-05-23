@@ -1,15 +1,36 @@
-import { useState, useEffect } from "react";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
-import getShop from "./Components/getShop";
+//pacakges
+import { useOutletContext } from "react-router-dom";
 
-//Shop.jsx
-function Shop ({ data, cart, addToCart }) {
+// components
+import Footer from "./Footer";
+
+function Shop () {
+  const context = useOutletContext();
+  const data = context.data;
+  const cart = context.cart;
+  const setCart = context.setCart;
+
+
+  // add to cart function for Shop.jsx
+  const addToCart = (item, quantity) => {
+    //// Need to fix the setCart function. Add or subtract items based on id?
+    // if id already exists, add or subtract from quantity
+      //code
+
+    //otherwise, add this item id to cart (also do not let quantity become negative)
+      // code
+
+
+
+    //maybe useful code, maybe junk ¯\_ (ツ)_/¯
+    // setCart((prevCart) => [...prevCart, { ...item, quantity }]);
+
+    // Clear quantity input after adding item to cart
+    document.getElementById(`quantity-${item.id}`).value = 0;
+  };
 
   return (
     <div className="content">
-      {/* Load Navigation Bar */}
-      <NavBar cart={cart} />
       <div id="shopHeader">
         <h1>Shop!</h1>
         <p>Wow! So much random stuff!</p>
@@ -50,6 +71,7 @@ function Shop ({ data, cart, addToCart }) {
                       document.getElementById(`quantity-${item.id}`).value
                     );
                     addToCart(item, quantity);
+                    console.log(cart);
                   }}
                 >
                   Add to Cart
@@ -77,8 +99,7 @@ function Shop ({ data, cart, addToCart }) {
             </li>
           ))}
       </ul>
-      {/* Render Footer */}
-      <Footer />
+      <Footer></Footer>
     </div>
   );
 };
