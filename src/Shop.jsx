@@ -10,22 +10,24 @@ function Shop () {
   const cart = context.cart;
   const setCart = context.setCart;
 
+  console.log(data);
 
   // add to cart function for Shop.jsx
-  const addToCart = (item, quantity) => {
+  const updateCart = (item, quantity) => {
     //// Need to fix the setCart function. Add or subtract items based on id?
-    // if id already exists, add or subtract from quantity
-      //code
+    // if ID already exists, add or subtract from quantity
+    for (let i = 0; i < cart.length; i ++) {
+      console.log(i, cart.length);
+      cart[i];
+    }
+    // if (cart.includes(item.id)) {
+    //   
+    // }
 
     //otherwise, add this item id to cart (also do not let quantity become negative)
       // code
 
-
-
-    //maybe useful code, maybe junk ¯\_ (ツ)_/¯
-    // setCart((prevCart) => [...prevCart, { ...item, quantity }]);
-
-    // Clear quantity input after adding item to cart
+    // Clear input quantity after adding an item to cart
     document.getElementById(`quantity-${item.id}`).value = 0;
   };
 
@@ -70,7 +72,7 @@ function Shop () {
                     const quantity = parseInt(
                       document.getElementById(`quantity-${item.id}`).value
                     );
-                    addToCart(item, quantity);
+                    updateCart(item, quantity);
                     console.log(cart);
                   }}
                 >

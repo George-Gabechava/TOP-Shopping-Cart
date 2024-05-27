@@ -1,13 +1,25 @@
-import { render, screen } from "@testing-library/react";
-import App from "../src/App";
-import { MemoryRouter} from "react-router-dom";
+import { render, screen, waitFor } from "@testing-library/react";
+import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { describe, it, expect } from "vitest";
 
-describe("App component", () => {
-  it("renders correct heading", () => {
+// Components
+import NavBar from "../src/NavBar";
+import Home from "../src/Home";
+
+describe("Home Page", () => {
+  it('should render home page after fetching data', async () => {
     render(
-    <MemoryRouter>
-      <App />
-    </MemoryRouter>);
-    expect(screen.getByRole("heading").textContent).toMatch(/the random stuff store/i);
+      <MemoryRouter initialEntries={['/']}>
+        <Routes>
+          <Route path="/" element={<NavBar />}>
+            <Route index element={<Home />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    // Wait for the data fetching to complete and the heading to be rendered
+    const heading = await screen.findByRole('heading', { level: 1 });
+    expect(heading).toHaveTextContent(/The Random Stuff Store/i);
   });
 });

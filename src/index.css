@@ -78,7 +78,6 @@ nav p {
   background-color: #FFF9D0;
   flex-direction: column;
   align-items: center;
-  /* don't want whitespace at bottom of home page */
 }
 
 #homeList {

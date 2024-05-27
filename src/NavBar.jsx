@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+// import PropTypes from 'prop-types';
 
 //Components
 import getShop from "./Components/getShop";
@@ -39,6 +40,7 @@ function NavBar() {
   return (
     <>
       <nav>
+        {/* Left side of Navigation Bar */}
         <div id="navLeft">
           <Link className="navLeftItem" to="/">
             <img id="homeSVG" src={home} alt="home icon" />
@@ -46,12 +48,13 @@ function NavBar() {
           </Link>
         </div>
 
+        {/* Right side of Navigation Bar */}
         <div id="navRight">
           <Link className="navRightItem" to="/shop">
             <p id="shopLink">Shop</p>
           </Link>
 
-          {/* Cart Icon to update with number of items in cart */}
+          {/* Cart Icon updates with number of items in cart */}
           <Link className="navRightItem" to="/cart">
             <p>Cart</p>
             <img id="cartSVG" src={cartImage} alt="cart icon" />
