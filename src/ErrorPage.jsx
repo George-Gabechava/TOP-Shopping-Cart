@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const ErrorPage = () => {
   return (
@@ -11,7 +12,7 @@ const ErrorPage = () => {
       </Link>
       
         <h3>Or you can <Link to="https://www.linkedin.com/in/george-gabechava-92905b85">ping me on linkedIn </Link> to finish it</h3>
-      
+    <Footer></Footer>
     </div>
   );
 };
