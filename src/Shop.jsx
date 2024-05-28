@@ -10,25 +10,53 @@ function Shop () {
   const cart = context.cart;
   const setCart = context.setCart;
 
-  console.log(data);
-
   // add to cart function for Shop.jsx
-  const updateCart = (item, quantity) => {
-    //// Need to fix the setCart function. Add or subtract items based on id?
-    // if ID already exists, add or subtract from quantity
-    for (let i = 0; i < cart.length; i ++) {
-      console.log(i, cart.length);
-      cart[i];
+  const updateCart = (item, newQuantity) => {
+    // return if newQuantity = 0. No update needed.
+    if (newQuantity === 0 || isNaN(newQuantity)) {
+      return;
     }
-    // if (cart.includes(item.id)) {
-    //   
-    // }
 
-    //otherwise, add this item id to cart (also do not let quantity become negative)
-      // code
+    // If ID already exists, add or subtract from quantity
+    console.log("len", cart.length);
+    if (cart.length === 0 ) {
+      setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);  
+      return;
+    }
 
+    for (let i = 0; i < cart.length; i ++) {
+      console.log(i, "match?", cart[i].item, item.id );
+      if (cart[i].item === item.id) {
+        // add items
+        if (newQuantity > 0) {
+          console.log("add");
+          cart[i].quantity = cart[i].quantity + newQuantity;
+          setCart(cart);  
+          return;
+        }
+        // subtract items if total quantity is >0  
+        if (newQuantity < 0 && cart[i].quantity >  Math.abs(newQuantity) ) {
+          console.log("sub it", typeof(newQuantity));
+          cart[i].quantity = cart[i].quantity + newQuantity;
+          setCart(cart);  
+          return;
+        }
+        // set quantity to 0 if total quantity is <=0
+        if (newQuantity < 0 && cart[i].quantity <  Math.abs(newQuantity)) {
+          cart[i].quantity = 0
+          setCart(cart);
+          return;
+        }
+      }
+
+      //If ID doesn't exist in array, add this item id to cart  
+      if (!(cart[i].item === item.id) && i === (cart.length - 1)) {
+        setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);  
+        return;
+      }
+    }
+    console.log("again", cart);
     // Clear input quantity after adding an item to cart
-    document.getElementById(`quantity-${item.id}`).value = 0;
   };
 
   return (
@@ -73,7 +101,8 @@ function Shop () {
                       document.getElementById(`quantity-${item.id}`).value
                     );
                     updateCart(item, quantity);
-                    console.log(cart);
+                    document.getElementById(`quantity-${item.id}`).value = 0;
+                    console.log("return", cart);
                   }}
                 >
                   Add to Cart
