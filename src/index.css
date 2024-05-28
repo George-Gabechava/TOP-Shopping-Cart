@@ -127,6 +127,11 @@ nav p {
   border-radius: 10px;
 }
 
+#shopList p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .quantityBar {
   width: 100%;
 }
@@ -134,17 +139,16 @@ nav p {
 .interactionBar {
   display: flex;
   justify-content: center;
+  margin-top: 5px;
+}
+
+.interactionBar button {
+  font-weight: bold;
 }
 
 .shopImage {
-  /* width: 100%; */
   max-height: 50%;
   max-width: 100%;
-}
-
-#shopList p {
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 /* Footer CSS */
@@ -155,4 +159,17 @@ footer {
 
 footer a:link {
   color: black;
+}
+
+/* Mobile */
+@media (max-width: 500px) {
+  #shopList li {
+    max-width: 30vw;
+    max-height: 50vh;
+  }
+
+  .shopImage {
+    max-height: 40%;
+    max-width: 90%;
+  }
 }

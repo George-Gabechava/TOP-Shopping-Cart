@@ -9,6 +9,24 @@ function Shop () {
   const data = context.data;
   const cart = context.cart;
   const setCart = context.setCart;
+  const cartCount = context.cartCount;
+  const setCartCount = context.setCartCount;
+
+  console.log(data);
+
+  const countCart = (currentCart) => {
+    let currentCartQuantity = 0;
+    if (currentCart.length === 0 ) {
+      setCartCount(0);
+      return;
+    }
+    for (let i = 0; i < currentCart.length; i ++) {
+      const thisQuantity = currentCart[i].quantity;
+      currentCartQuantity = currentCartQuantity + thisQuantity;
+    }
+    setCartCount(currentCartQuantity);
+  }
+
 
   // add to cart function for Shop.jsx
   const updateCart = (item, newQuantity) => {
@@ -17,46 +35,43 @@ function Shop () {
       return;
     }
 
-    // If ID already exists, add or subtract from quantity
-    console.log("len", cart.length);
+    // Create cart if there isn't one.    
     if (cart.length === 0 ) {
-      setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);  
+      setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);
+      // countCart
       return;
     }
 
+    // If ID already exists, add or subtract from quantity
     for (let i = 0; i < cart.length; i ++) {
-      console.log(i, "match?", cart[i].item, item.id );
       if (cart[i].item === item.id) {
         // add items
         if (newQuantity > 0) {
-          console.log("add");
           cart[i].quantity = cart[i].quantity + newQuantity;
           setCart(cart);  
           return;
         }
         // subtract items if total quantity is >0  
-        if (newQuantity < 0 && cart[i].quantity >  Math.abs(newQuantity) ) {
-          console.log("sub it", typeof(newQuantity));
+        if (newQuantity < 0 && cart[i].quantity >  Math.abs(newQuantity) && cart[i].quantity ) {
           cart[i].quantity = cart[i].quantity + newQuantity;
           setCart(cart);  
           return;
         }
-        // set quantity to 0 if total quantity is <=0
-        if (newQuantity < 0 && cart[i].quantity <  Math.abs(newQuantity)) {
-          cart[i].quantity = 0
+        // set quantity to 0 if total quantity is <=0, then remove this item from array
+        if (newQuantity < 0 && cart[i].quantity <=  Math.abs(newQuantity)) {
+          cart[i].quantity = 0;
+          cart.splice(i,1);
           setCart(cart);
           return;
         }
       }
 
       //If ID doesn't exist in array, add this item id to cart  
-      if (!(cart[i].item === item.id) && i === (cart.length - 1)) {
+      if (!(cart[i].item === item.id) && i === (cart.length - 1) && newQuantity > 0) {
         setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);  
         return;
       }
     }
-    console.log("again", cart);
-    // Clear input quantity after adding an item to cart
   };
 
   return (
@@ -89,6 +104,9 @@ function Shop () {
                     document.getElementById(
                       `quantity-${item.id}`
                     ).value = quantity - 1;
+                    if (quantity === 0 || isNaN(quantity)) {
+                      document.getElementById(`quantity-${item.id}`).value = -1;
+                    }
                   }}
                 >
                   -
@@ -102,7 +120,7 @@ function Shop () {
                     );
                     updateCart(item, quantity);
                     document.getElementById(`quantity-${item.id}`).value = 0;
-                    console.log("return", cart);
+                    countCart(cart);
                   }}
                 >
                   Add to Cart
