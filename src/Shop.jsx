@@ -1,10 +1,10 @@
-//pacakges
+// packages
 import { useOutletContext } from "react-router-dom";
 
 // components
 import Footer from "./Footer";
 
-function Shop () {
+function Shop() {
   const context = useOutletContext();
   const data = context.data;
   const cart = context.cart;
@@ -14,59 +14,77 @@ function Shop () {
 
   const countCart = (currentCart) => {
     let currentCartQuantity = 0;
-    if (currentCart.length === 0 ) {
+    if (currentCart.length === 0) {
       setCartCount(0);
       return;
     }
-    for (let i = 0; i < currentCart.length; i ++) {
+    for (let i = 0; i < currentCart.length; i++) {
       const thisQuantity = currentCart[i].quantity;
       currentCartQuantity = currentCartQuantity + thisQuantity;
     }
     setCartCount(currentCartQuantity);
-  }
+  };
 
-
-  // add to cart function for Shop.jsx
+  // Add-to-cart function for Shop.jsx
   const updateCart = (item, newQuantity) => {
     // return if newQuantity = 0. No update needed.
     if (newQuantity === 0 || isNaN(newQuantity)) {
       return;
     }
 
-    // Create cart if there isn't one.    
-    if (cart.length === 0 ) {
-      setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);
-      // countCart
+    // Create cart if there isn't one.
+    if (cart.length === 0) {
+      setCart((prevCart) => {
+        const newCart = [...prevCart, { item: item.id, quantity: newQuantity }]; 
+        countCart(newCart); 
+        return newCart; 
+      });
       return;
     }
 
     // If ID already exists, add or subtract from quantity
-    for (let i = 0; i < cart.length; i ++) {
+    for (let i = 0; i < cart.length; i++) {
       if (cart[i].item === item.id) {
         // add items
         if (newQuantity > 0) {
-          cart[i].quantity = cart[i].quantity + newQuantity;
-          setCart(cart);  
+          const newCart = cart.map((cartItem, index) => {
+            if (index === i) {
+              return { ...cartItem, quantity: cartItem.quantity + newQuantity }; 
+            }
+            return cartItem;
+          });
+          setCart(newCart); 
+          countCart(newCart); 
           return;
         }
-        // subtract items if total quantity is >0  
-        if (newQuantity < 0 && cart[i].quantity >  Math.abs(newQuantity) && cart[i].quantity ) {
-          cart[i].quantity = cart[i].quantity + newQuantity;
-          setCart(cart);  
+        // subtract items if total quantity is >0
+        if (newQuantity < 0 && cart[i].quantity > Math.abs(newQuantity)) {
+          const newCart = cart.map((cartItem, index) => {
+            if (index === i) {
+              return { ...cartItem, quantity: cartItem.quantity + newQuantity }; 
+            }
+            return cartItem;
+          });
+          setCart(newCart); 
+          countCart(newCart); 
           return;
         }
         // set quantity to 0 if total quantity is <=0, then remove this item from array
-        if (newQuantity < 0 && cart[i].quantity <=  Math.abs(newQuantity)) {
-          cart[i].quantity = 0;
-          cart.splice(i,1);
-          setCart(cart);
+        if (newQuantity < 0 && cart[i].quantity <= Math.abs(newQuantity)) {
+          const newCart = [...cart.slice(0, i), ...cart.slice(i + 1)];
+          setCart(newCart);
+          countCart(newCart);
           return;
-        }
+        }        
       }
 
-      //If ID doesn't exist in array, add this item id to cart  
+      // If ID doesn't exist in array, add this item id to cart
       if (!(cart[i].item === item.id) && i === (cart.length - 1) && newQuantity > 0) {
-        setCart((prevCart) => [...prevCart, { item: item.id, quantity: newQuantity }]);  
+        setCart((prevCart) => {
+          const newCart = [...prevCart, { item: item.id, quantity: newQuantity }]; 
+          countCart(newCart); 
+          return newCart; 
+        });
         return;
       }
     }
@@ -109,8 +127,8 @@ function Shop () {
                 >
                   -
                 </button>
-              
-                {/* Put current item quantity into cart*/}
+
+                {/* Put current item quantity into cart */}
                 <button
                   onClick={() => {
                     const quantity = parseInt(
@@ -118,7 +136,6 @@ function Shop () {
                     );
                     updateCart(item, quantity);
                     document.getElementById(`quantity-${item.id}`).value = 0;
-                    countCart(cart);
                   }}
                 >
                   Add to Cart
@@ -149,6 +166,6 @@ function Shop () {
       <Footer></Footer>
     </div>
   );
-};
+}
 
 export default Shop;
