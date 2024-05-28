@@ -12,8 +12,6 @@ function Shop () {
   const cartCount = context.cartCount;
   const setCartCount = context.setCartCount;
 
-  console.log(data);
-
   const countCart = (currentCart) => {
     let currentCartQuantity = 0;
     if (currentCart.length === 0 ) {
